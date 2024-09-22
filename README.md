@@ -1,7 +1,8 @@
  📸 **Memergy** 🌀  
 *The Ultimate AI-Powered Meme Generator*
 
-![image](https://github.com/user-attachments/assets/dee194e2-0ce7-4fe5-abf9-790982ef9888)
+![image](https://github.com/user-attachments/assets/4a2662fa-0753-4009-86a8-e7f8e85f8d54)
+
 
 
 *“When AI meets memes, magic happens!”*
