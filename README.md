@@ -244,6 +244,9 @@ Stay tuned and keep the memes coming! 🚀
 
 Check out some of the awesome memes created with Memergy! 📸✨
 
+![IMG_8316](https://github.com/user-attachments/assets/8c225ed9-c9bb-4bc7-b04b-ea937f922be3)
+![IMG_3515](https://github.com/user-attachments/assets/45675708-ef3e-4117-b3dd-aaee1d3e7047)
+![IMG_3176](https://github.com/user-attachments/assets/4ec391f6-7c66-468d-9d45-437748fcfac8)
 
 
 
