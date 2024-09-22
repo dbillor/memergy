@@ -121,6 +121,9 @@ python generate_memes.py
 
 ## 🎨 **Example Workflow** 🎨
 
+
+### IMPORTANT YOU MUST CREATE meme_images/ folder and generated_memes/ folder for memes!!
+
 1. **Add Your Meme Templates:**
    - Drop your favorite meme images into the `images/` folder. 📂✨
 
