@@ -9,9 +9,6 @@ from PIL import Image
 # OpenAI API Key
 api_key = os.getenv("API_KEY")
 
-
-import sqlite3
-
 def initialize_database():
     conn = sqlite3.connect('memes.db')
     cursor = conn.cursor()
