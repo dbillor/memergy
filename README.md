@@ -224,6 +224,8 @@ Got questions, suggestions, or just want to share your latest meme creation? Hit
 
 We're constantly improving Memergy to bring you the best meme-generating experience. Here's what's coming next:
 
+- ** immediate TODO is: update memes with hard coded coordinates and usage **-
+
 - **Advanced Customization Options** 🎨
 - **Integration with Social Media Platforms** 📱
 - **Enhanced AI for Even Funnier Memes** 🤖😂
