@@ -23,7 +23,7 @@ user_input = input("Enter your situation or feeling: ")
 
 # Variation prompts inspired by the comedic styles of the funniest individuals
 variation_prompts = {
-    "1": "In the style of Dave Chappelle's sharp wit, craft a hilarious caption for '{meme_name}' based on: \"{user_input}\".",
+        "1": "In the style of Dave Chappelle's sharp wit, craft a hilarious caption for this meme: '{meme_name}' based on: \"{user_input}\".",
     "2": "Channeling Ellen DeGeneres' relatable humor, write a funny caption for '{meme_name}' inspired by: \"{user_input}\".",
     "3": "Using Kevin Hart's energetic storytelling, create a comedic caption for '{meme_name}' reflecting: \"{user_input}\".",
     "4": "Embodying Tina Fey's clever satire, compose a witty caption for '{meme_name}' that incorporates: \"{user_input}\".",
@@ -308,8 +308,6 @@ def add_text_to_image(image_path, captions, font_details, output_path, text_posi
             print(f"No position data for '{position_key}', skipping.")
             continue
 
-        print(position_value)
-        
         x = position_value.get('x', 0)
         y = position_value.get('y', 0)
         max_width = position_value.get('max_width', image_width)
@@ -405,6 +403,10 @@ def add_text_to_image(image_path, captions, font_details, output_path, text_posi
 async def generate_captions(meme, user_input, variation_key):
     meme_name = meme[1]
     prompt_template = variation_prompts.get(variation_key)
+    prompt_template = prompt_template + f"details about the meme are as follows meme_description: < {meme[2]} > \
+                                          meme_intention: < {meme[3]}> \
+                                          meme_humor_reason: <{meme[4]}> \
+                                          emotional_tone : <{meme[5]}>" 
     if not prompt_template:
         print(f"No prompt found for variation {variation_key}")
         return None
@@ -449,27 +451,29 @@ async def generate_captions(meme, user_input, variation_key):
             return None
 
 async def generate_meme(meme, user_input, variation_key, output_folder):
-    captions = await generate_captions(meme, user_input, variation_key)
-    if captions:
-        meme_id = meme[0]
-        image_path = meme[10]  # Adjust index based on your table structure
-        text_positions = json.loads(meme[11]) if meme[11] else {}
-        font_details = json.loads(meme[12]) if meme[12] else {}
-        output_path = os.path.join(output_folder, f"meme_{meme_id}_variation_{variation_key}.jpg")
-        
-        # Corrected function call
-        add_text_to_image(
-            image_path=image_path,
-            captions=captions,
-            font_details=font_details,
-            output_path=output_path,
-            text_positions=text_positions
-        )
-        
-        print(f"Generated meme saved at {output_path}")
-    else:
-        print(f"Failed to generate meme for meme_id: {meme[0]} with variation {variation_key}")
-
+    try:
+        captions = await generate_captions(meme, user_input, variation_key)
+        if captions:
+            meme_id = meme[0]
+            image_path = meme[10]  # Adjust index based on your table structure
+            text_positions = json.loads(meme[11]) if meme[11] else {}
+            font_details = json.loads(meme[12]) if meme[12] else {}
+            output_path = os.path.join(output_folder, f"meme_{meme_id}_variation_{variation_key}.jpg")
+            
+            # Corrected function call
+            add_text_to_image(
+                image_path=image_path,
+                captions=captions,
+                font_details=font_details,
+                output_path=output_path,
+                text_positions=text_positions
+            )
+            
+            print(f"Generated meme saved at {output_path}")
+        else:
+            print(f"Failed to generate meme for meme_id: {meme[0]} with variation {variation_key}")
+    except Exception as e:
+        print(f"unable to generate meme prob due to captions exception was {e}")
 
 def create_html_gallery(output_folder):
     html_content = "<html><body><h1>Generated Memes</h1>"
