@@ -491,7 +491,7 @@ async def generate_memes_async(user_input):
         variation_keys = list(variation_prompts.keys())
         for meme in memes:
             # Randomly select up to 10 variations per meme
-            selected_variations = random.sample(variation_keys, min(10, len(variation_keys)))
+            selected_variations = random.sample(variation_keys, min(1, len(variation_keys)))
             for variation_key in selected_variations:
                 try:
                     tasks.append(generate_meme(meme, user_input, variation_key, OUTPUT_FOLDER))
@@ -532,7 +532,7 @@ async def main():
         variation_keys = list(variation_prompts.keys())
         for meme in memes:
             # Randomly select a subset of variations to avoid overwhelming API limits
-            selected_variations = random.sample(variation_keys, min(10, len(variation_keys)))
+            selected_variations = random.sample(variation_keys, min(1, len(variation_keys)))
             for variation_key in selected_variations:
                 try:
                     tasks.append(generate_meme(meme, user_input, variation_key, OUTPUT_FOLDER))
