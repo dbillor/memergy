@@ -457,7 +457,13 @@ async def generate_meme(meme, user_input, variation_key, output_folder):
         captions = await generate_captions(meme, user_input, variation_key)
         if captions:
             meme_id = meme[0]
-            image_path = meme[10]  # Adjust index based on your table structure
+            image_filename = os.path.basename(meme[10])
+            meme_images_folder = os.path.join(os.path.dirname(os.path.abspath(__file__)), "meme_images")
+            # Construct the relative image path
+            image_path = os.path.join(meme_images_folder, image_filename)
+            
+
+            #image_path = meme[10]  # Adjust index based on your table structure
             text_positions = json.loads(meme[11]) if meme[11] else {}
             font_details = json.loads(meme[12]) if meme[12] else {}
             output_path = os.path.join(OUTPUT_FOLDER, f"meme_{meme_id}_variation_{variation_key}.jpg")
