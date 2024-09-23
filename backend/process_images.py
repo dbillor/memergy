@@ -9,6 +9,9 @@ from PIL import Image
 # OpenAI API Key
 api_key = os.getenv("API_KEY")
 
+meme_folder= os.path.join(os.path.dirname(os.path.abspath(__file__)), "meme_images")
+
+
 def initialize_database():
     conn = sqlite3.connect('memes.db')
     cursor = conn.cursor()
@@ -154,8 +157,7 @@ def process_all_images(directory):
 # Main execution
 if __name__ == "__main__":
     initialize_database() 
-    image_directory = "/Users/dbillor/workspace/memergy/backend/meme_images"
-    process_all_images(image_directory)
+    process_all_images(meme_folder)
 
 
 
