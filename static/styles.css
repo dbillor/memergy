@@ -83,22 +83,22 @@ table {
 
 /* Specific Corner Positions */
 .top-left {
-    top: 10px;
+    top: 50px;
     left: 10px;
 }
 
 .top-right {
-    top: 10px;
+    top: 30px;
     right: 10px;
 }
 
 .bottom-left {
-    bottom: 10px;
+    bottom: 60px;
     left: 10px;
 }
 
 .bottom-right {
-    bottom: 10px;
+    bottom: 25px;
     right: 10px;
 }
 
@@ -111,9 +111,19 @@ table {
 
 /* Loading GIF Styling */
 #loading {
-    width: 100px; /* Increased size from 50px to 100px */
-    height: auto;
+    display: none; /* Retain existing display property */
+    width: 300px;  /* Adjust width as needed */
+    height: auto;  /* Maintain aspect ratio */
+    /* Optional: Add animation or positioning */
+    /* Example: Center the GIF */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999; /* Ensure it overlays other elements */
 }
+
+
 
 /* Responsive Gallery */
 .gallery-container {
