@@ -270,7 +270,7 @@ def add_text_to_image(image_path, captions, font_details, output_path, text_posi
     draw = ImageDraw.Draw(txt_layer)
     
     # Set default font details
-    font_path = os.path.join(os.path.dirname(__file__), 'fonts', 'Impact.ttf')
+    font_path = os.path.join(os.path.dirname(__file__), 'fonts', 'impact.ttf')
     
     # Dynamic Font Scaling: Define font size as a percentage of image height
     # For example, 5% of the image height
