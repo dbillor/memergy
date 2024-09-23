@@ -1,0 +1,660 @@
+/* static/styles.css */
+
+/* Retro Font and Base Styling */
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background-color: #00ffff; /* Bright cyan background */
+    color: #000000; /* Black text */
+    text-align: center;
+    position: relative; /* To position GIFs absolutely within the body */
+    overflow: hidden; /* Hide any overflowing GIFs */
+}
+
+/* Marquee Styling */
+.marquee {
+    color: #ff00ff; /* Bright magenta */
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Blinking Text */
+.blink {
+    animation: blink 1s step-start 0s infinite;
+}
+
+/* Keyframes for Blinking Effect */
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+/* Table Styling */
+table {
+    border: 3px dashed #ff69b4; /* Hot pink dashed border */
+}
+
+/* Input Field Styling */
+.input-field {
+    background-color: #ffff00; /* Bright yellow */
+    border: 2px solid #0000ff; /* Blue border */
+    font-size: 16px;
+    padding: 5px;
+}
+
+/* Submit Button Styling */
+.submit-button {
+    background-color: #00ff00; /* Bright green */
+    color: #000000; /* Black text */
+    border: 2px solid #ff0000; /* Red border */
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Submit Button Hover Effect */
+.submit-button:hover {
+    background-color: #ff0000; /* Change to red on hover */
+    color: #ffffff; /* White text */
+}
+
+/* Error Message Styling */
+.error {
+    color: red;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/* Back Link Styling */
+.back-link {
+    text-decoration: none;
+    color: #ff4500; /* Orange-red */
+    font-size: 18px;
+}
+
+.back-link:hover {
+    color: #adff2f; /* Green-yellow on hover */
+}
+
+/* Corner GIF Styling */
+.corner-gif {
+    position: absolute;
+    width: 150px; /* Increased size from 100px to 150px */
+    height: auto;
+}
+
+/* Specific Corner Positions */
+.top-left {
+    top: 10px;
+    left: 10px;
+}
+
+.top-right {
+    top: 10px;
+    right: 10px;
+}
+
+.bottom-left {
+    bottom: 10px;
+    left: 10px;
+}
+
+.bottom-right {
+    bottom: 10px;
+    right: 10px;
+}
+
+/* Central Decorative GIF Styling (if used) */
+.central-gif {
+    width: 200px; /* Adjust size as needed */
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* Loading GIF Styling */
+#loading {
+    width: 100px; /* Increased size from 50px to 100px */
+    height: auto;
+}
+
+/* Responsive Gallery */
+.gallery-container {
+    max-height: 80vh;
+    overflow-y: scroll;
+}
+
+/* Optional: Add transition effects for images */
+.gallery-image {
+    transition: transform 0.2s; /* Animation */
+}
+
+.gallery-image:hover {
+    transform: scale(1.05); /* Zoom effect on hover */
+}
+
+/* AGI Humorous Text Styling */
+.agi-text {
+    color: #ff4500; /* Orange-red */
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-shadow: 2px 2px #000000;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

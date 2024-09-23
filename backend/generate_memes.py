@@ -7,6 +7,8 @@ from openai import AsyncOpenAI
 from openai import OpenAI
 import os
 
+OUTPUT_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "generated_memes")
+
 api_key = os.getenv('API_KEY')
 
 client = OpenAI(api_key=api_key)
@@ -19,7 +21,7 @@ from PIL import Image, ImageDraw, ImageFont
 # OpenAI API Key
 
 # User input
-user_input = input("Enter your situation or feeling: ")
+#user_input = input("Enter your situation or feeling: ")
 
 # Variation prompts inspired by the comedic styles of the funniest individuals
 variation_prompts = {
@@ -458,7 +460,7 @@ async def generate_meme(meme, user_input, variation_key, output_folder):
             image_path = meme[10]  # Adjust index based on your table structure
             text_positions = json.loads(meme[11]) if meme[11] else {}
             font_details = json.loads(meme[12]) if meme[12] else {}
-            output_path = os.path.join(output_folder, f"meme_{meme_id}_variation_{variation_key}.jpg")
+            output_path = os.path.join(OUTPUT_FOLDER, f"meme_{meme_id}_variation_{variation_key}.jpg")
             
             # Corrected function call
             add_text_to_image(
@@ -475,14 +477,42 @@ async def generate_meme(meme, user_input, variation_key, output_folder):
     except Exception as e:
         print(f"unable to generate meme prob due to captions exception was {e}")
 
+
+async def generate_memes_async(user_input):
+    memes = search_memes(user_input)
+    if memes:
+        tasks = []
+        variation_keys = list(variation_prompts.keys())
+        for meme in memes:
+            # Randomly select up to 10 variations per meme
+            selected_variations = random.sample(variation_keys, min(10, len(variation_keys)))
+            for variation_key in selected_variations:
+                try:
+                    tasks.append(generate_meme(meme, user_input, variation_key, OUTPUT_FOLDER))
+                except Exception as e:
+                    print(f"Failed to generate {meme} with variation {variation_key}. Exception: {e}")
+
+        # Limit the number of concurrent tasks to manage API rate limits
+        semaphore = asyncio.Semaphore(5)  # Adjust as per your rate limit
+
+        async def semaphore_task(task_coro):
+            async with semaphore:
+                await task_coro
+
+        await asyncio.gather(*(semaphore_task(task) for task in tasks))
+        return True
+    else:
+        return False
+
+
 def create_html_gallery(output_folder):
     html_content = "<html><body><h1>Generated Memes</h1>"
-    for filename in os.listdir(output_folder):
+    for filename in os.listdir(OUTPUT_FOLDER):
         if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.gif')):
             image_path = filename
             html_content += f'<div><img src="{image_path}" alt="{filename}" style="width:400px;"><p>{filename}</p></div>'
     html_content += "</body></html>"
-    html_file = os.path.join(output_folder, "gallery.html")
+    html_file = os.path.join(OUTPUT_FOLDER, "gallery.html")
     with open(html_file, "w") as f:
         f.write(html_content)
     print(f"Gallery created at {html_file}")
@@ -490,8 +520,7 @@ def create_html_gallery(output_folder):
 async def main():
     memes = search_memes(user_input)
     if memes:
-        output_folder = "/Users/dbillor/workspace/memergy/backend/generated_memes"
-        os.makedirs(output_folder, exist_ok=True)
+        os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
         tasks = []
         variation_keys = list(variation_prompts.keys())
@@ -500,7 +529,7 @@ async def main():
             selected_variations = random.sample(variation_keys, min(10, len(variation_keys)))
             for variation_key in selected_variations:
                 try:
-                    tasks.append(generate_meme(meme, user_input, variation_key, output_folder))
+                    tasks.append(generate_meme(meme, user_input, variation_key, OUTPUT_FOLDER))
                 except Exception as e:
                     print(f"for some reason {meme} didn't generate exception is: {e}")
 
@@ -512,10 +541,10 @@ async def main():
                 await task_coro
 
         await asyncio.gather(*(semaphore_task(task) for task in tasks))
-        create_html_gallery(output_folder)
+        create_html_gallery(OUTPUT_FOLDER)
     else:
         print("No memes found matching your input.")
 
 # Run the script
-if __name__ == "__main__":
-    asyncio.run(main())
+#if __name__ == "__main__":
+#    asyncio.run(main())

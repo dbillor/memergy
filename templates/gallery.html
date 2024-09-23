@@ -1,0 +1,463 @@
+<!-- templates/gallery.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Memergy - Gallery</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <h2 class="blink">Your Generated Memes</h2>
+    <!-- Include any additional CSS or JS for the modal here -->
+    <style>
+        /* Modal Styling */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            padding-top: 60px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        /* Caption */
+        #caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        /* Close Button */
+        .close {
+            position: absolute;
+            top: 30px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Scrollable Gallery */
+        .gallery-container {
+            max-height: 80vh;
+            overflow-y: scroll;
+        }
+
+        /* Responsive */
+        @media only screen and (max-width: 700px){
+            .modal-content {
+                width: 100%;
+            }
+        }
+
+        /* AGI Humorous Text */
+        .agi-text {
+            color: #ff4500; /* Orange-red */
+            font-size: 20px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-shadow: 2px 2px #000000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Corner GIFs -->
+    <img src="{{ url_for('static', filename='gifs/gif1.gif') }}" alt="Animated Cursor" class="corner-gif top-left">
+    <img src="{{ url_for('static', filename='gifs/gif2.gif') }}" alt="Dancing Baby" class="corner-gif top-right">
+    <img src="{{ url_for('static', filename='gifs/gif3.gif') }}" alt="Old Browser" class="corner-gif bottom-left">
+    <img src="{{ url_for('static', filename='gifs/gif4.gif') }}" alt="Yet Another GIF" class="corner-gif bottom-right">
+
+    <center>
+        <h2 class="blink">Your Generated Memes</h2>
+        
+        <!-- AGI Humorous Text -->
+        <h3 class="agi-text">Created with AGI – World's First AGI Meme Generation</h3>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% else %}
+            <div class="gallery-container">
+                <table border="1" bgcolor="#333333" cellpadding="15">
+                    <tr>
+                        {% for image in images %}
+                            <td>
+                                <img src="{{ url_for('generated_memes', filename=image) }}" alt="{{ image }}" width="300" class="gallery-image" style="cursor: pointer;">
+                                <br>
+                                <font color="#ffffff">{{ image }}</font>
+                            </td>
+                            {% if loop.index % 3 == 0 %}
+                    </tr><tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                </table>
+            </div>
+        {% endif %}
+        <br>
+        <a href="{{ url_for('index') }}" class="back-link">&#8592; Generate More Memes</a>
+    </center>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div id="caption"></div>
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the image and insert it inside the modal
+        var images = document.getElementsByClassName('gallery-image');
+        var modalImg = document.getElementById("modalImage");
+        var captionText = document.getElementById("caption");
+        for (let i = 0; i < images.length; i++) {
+            images[i].onclick = function(){
+                modal.style.display = "block";
+                modalImg.src = this.src;
+                captionText.innerHTML = this.alt;
+            }
+        }
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() { 
+            modal.style.display = "none";
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
