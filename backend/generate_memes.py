@@ -135,7 +135,7 @@ async def analyze_user_input(user_input):
         {
             "role": "system",
             "content": (
-                "You are an assistant that analyzes text and outputs results strictly in JSON format without any additional text."
+                "You are an assistant that analyzes text and outputs results strictly in JSON format without any additional text. Your a an ai designed to find humours elements of the users input so that it can be used to search and write captions for memes. We want to subvert user expectations and make people laugh their asses off."
             )
         },
         {
@@ -423,7 +423,18 @@ async def generate_captions(meme, user_input, variation_key):
 
     response = await aclient.chat.completions.create(
         model="gpt-4o",  # Use "gpt-4" or "gpt-3.5-turbo" if "gpt-4o" is unavailable
-        messages=[{"role": "user", "content": prompt}],
+        messages=[
+            {
+                "role": "system",
+                "content": (
+                    "you are an i designed to write captions for specific memes from user inputs and and given meme templates. your job is to write  captions for memes that make people laugh. it's good to subvert user expectations to make people laugh and create unexpected captions that capture humor from the users situations. The captinos you create should meet the meme template and how to write the memes."
+                )
+            },
+            {
+                "role": "user",
+                "content": (prompt)
+
+            }],
         max_tokens=150,
         temperature=0.9
     )
@@ -491,7 +502,7 @@ async def generate_memes_async(user_input):
         variation_keys = list(variation_prompts.keys())
         for meme in memes:
             # Randomly select up to 10 variations per meme
-            selected_variations = random.sample(variation_keys, min(1, len(variation_keys)))
+            selected_variations = random.sample(variation_keys, min(10, len(variation_keys)))
             for variation_key in selected_variations:
                 try:
                     tasks.append(generate_meme(meme, user_input, variation_key, OUTPUT_FOLDER))
@@ -532,7 +543,7 @@ async def main():
         variation_keys = list(variation_prompts.keys())
         for meme in memes:
             # Randomly select a subset of variations to avoid overwhelming API limits
-            selected_variations = random.sample(variation_keys, min(1, len(variation_keys)))
+            selected_variations = random.sample(variation_keys, min(10, len(variation_keys)))
             for variation_key in selected_variations:
                 try:
                     tasks.append(generate_meme(meme, user_input, variation_key, OUTPUT_FOLDER))
