@@ -427,7 +427,7 @@ async def generate_captions(meme, user_input, variation_key):
             {
                 "role": "system",
                 "content": (
-                    "you are an i designed to write captions for specific memes from user inputs and and given meme templates. your job is to write  captions for memes that make people laugh. it's good to subvert user expectations to make people laugh and create unexpected captions that capture humor from the users situations. The captinos you create should meet the meme template and how to write the memes."
+                    "you are an ai designed to write captions for specific memes from user inputs and and given meme templates. your job is to make people laugh. it's good to subvert user expectations  and create unexpected captions that insert and capture the humor from the users situations. The captions you create should meet the meme template and how to write the memes."
                 )
             },
             {
@@ -502,7 +502,7 @@ async def generate_memes_async(user_input):
         variation_keys = list(variation_prompts.keys())
         for meme in memes:
             # Randomly select up to 10 variations per meme
-            selected_variations = random.sample(variation_keys, min(10, len(variation_keys)))
+            selected_variations = random.sample(variation_keys, min(1, len(variation_keys)))
             for variation_key in selected_variations:
                 try:
                     tasks.append(generate_meme(meme, user_input, variation_key, OUTPUT_FOLDER))
@@ -543,7 +543,7 @@ async def main():
         variation_keys = list(variation_prompts.keys())
         for meme in memes:
             # Randomly select a subset of variations to avoid overwhelming API limits
-            selected_variations = random.sample(variation_keys, min(10, len(variation_keys)))
+            selected_variations = random.sample(variation_keys, min(1, len(variation_keys)))
             for variation_key in selected_variations:
                 try:
                     tasks.append(generate_meme(meme, user_input, variation_key, OUTPUT_FOLDER))
